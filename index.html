@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairosからのご提案 | 昼と夜、ふたつの物語を紡ぐ店舗サイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --day-main:#FFC94A;
+    --day-sub:#FF7B54;
+    --day-light:#FFF3D6;
+    --night-main:#1B1F3B;
+    --night-deep:#0B0D21;
+    --night-pink:#FF4FA3;
+    --night-cyan:#00D9C0;
+    --cream:#FFF8ED;
+    --ink:#2B2621;
+    --gray:#5A5248;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.85;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.mincho{
+    font-family:'Shippori Mincho B1', serif;
+  }
+  a{text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    display:flex;
+    min-height:100vh;
+    width:100%;
+  }
+  .hero-day, .hero-night{
+    position:relative;
+    flex:1;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .hero-day{
+    background:linear-gradient(160deg, #FFE39B 0%, var(--day-main) 45%, var(--day-sub) 100%);
+  }
+  .hero-night{
+    background:linear-gradient(200deg, var(--night-main) 0%, var(--night-deep) 100%);
+  }
+  .sun{
+    width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle at 32% 30%, #FFFBE0, #FF9F45 72%);
+    box-shadow:0 0 90px 24px rgba(255,159,69,0.55);
+    position:absolute;
+    top:18%;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  .day-rays{
+    position:absolute;
+    bottom:-10%;
+    left:0;right:0;
+    height:50%;
+    background:
+      linear-gradient(0deg, rgba(255,255,255,0.35), transparent 70%);
+  }
+  .moon{
+    width:110px;height:110px;border-radius:50%;
+    background:#FFF6DC;
+    position:absolute;
+    top:16%;
+    left:50%;
+    transform:translateX(-50%);
+    box-shadow:0 0 60px 14px rgba(255,246,220,0.35);
+  }
+  .moon::after{
+    content:'';
+    position:absolute;
+    width:92px;height:92px;
+    border-radius:50%;
+    background:linear-gradient(200deg, var(--night-main) 0%, var(--night-deep) 100%);
+    top:-14px;
+    left:28px;
+  }
+  .stars{
+    position:absolute;
+    inset:0;
+  }
+  .stars span{
+    position:absolute;
+    width:3px;height:3px;
+    background:#fff;
+    border-radius:50%;
+    opacity:.8;
+  }
+  .neon-sign{
+    position:absolute;
+    bottom:12%;
+    left:50%;
+    transform:translateX(-50%) rotate(-3deg);
+    font-family:'Shippori Mincho B1', serif;
+    font-size:clamp(1rem, 2.4vw, 1.5rem);
+    color:var(--night-pink);
+    text-shadow:
+      0 0 6px var(--night-pink),
+      0 0 18px var(--night-pink),
+      0 0 34px rgba(255,79,163,0.6);
+    letter-spacing:.3em;
+    white-space:nowrap;
+  }
+  .hero-copy{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:5;
+    text-align:center;
+    width:92%;
+    max-width:760px;
+  }
+  .hero-copy .tag{
+    display:inline-block;
+    font-size:.78rem;
+    letter-spacing:.25em;
+    color:#fff;
+    background:rgba(0,0,0,0.35);
+    padding:6px 18px;
+    border-radius:999px;
+    margin-bottom:22px;
+    backdrop-filter:blur(2px);
+  }
+  .hero-copy h1{
+    font-size:clamp(1.7rem, 4.6vw, 3.1rem);
+    color:#fff;
+    line-height:1.55;
+    text-shadow:0 2px 24px rgba(0,0,0,0.45);
+    font-weight:700;
+  }
+  .hero-copy h1 em{
+    font-style:normal;
+    color:#FFF3D0;
+    background:linear-gradient(90deg, var(--day-sub), var(--night-pink));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-copy p{
+    margin-top:22px;
+    color:#fff;
+    font-size:.95rem;
+    opacity:.92;
+    text-shadow:0 2px 10px rgba(0,0,0,0.4);
+  }
+  .scroll-hint{
+    position:absolute;
+    bottom:26px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:5;
+    color:#fff;
+    font-size:.72rem;
+    letter-spacing:.2em;
+    opacity:.8;
+  }
+
+  @media (max-width:768px){
+    .hero{flex-direction:column;}
+    .hero-day, .hero-night{min-height:50vh;}
+    .sun,.moon{width:90px;height:90px;top:10%;}
+    .moon::after{width:76px;height:76px;top:-11px;left:22px;}
+  }
+
+  /* ===== SECTION COMMON ===== */
+  section{padding:100px 0;position:relative;}
+  .eyebrow{
+    font-size:.78rem;
+    letter-spacing:.3em;
+    color:var(--day-sub);
+    font-weight:700;
+    margin-bottom:14px;
+    text-transform:uppercase;
+  }
+  .sec-title{
+    font-size:clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom:28px;
+    font-weight:700;
+  }
+
+  /* ===== UNDERSTANDING ===== */
+  .understanding{
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,201,74,0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(27,31,59,0.08), transparent 50%),
+      var(--cream);
+  }
+  .understanding .lead{
+    font-family:'Shippori Mincho B1', serif;
+    font-size:clamp(1.25rem, 2.6vw, 1.7rem);
+    line-height:2;
+    color:var(--ink);
+    border-left:4px solid var(--day-sub);
+    padding-left:24px;
+    margin:36px 0 36px;
+  }
+  .understanding .lead span{
+    color:var(--night-main);
+    font-weight:800;
+  }
+  .understanding .sub-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-top:40px;
+  }
+  .sub-card{
+    background:#fff;
+    border-radius:16px;
+    padding:26px;
+    box-shadow:0 10px 30px rgba(27,31,59,0.06);
+  }
+  .sub-card .mark{
+    font-size:.75rem;
+    letter-spacing:.2em;
+    color:var(--night-pink);
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .sub-card p{color:var(--gray); font-size:.92rem;}
+  @media (max-width:700px){
+    .understanding .sub-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== VALUE ===== */
+  .value{
+    background:linear-gradient(200deg, var(--night-main) 0%, var(--night-deep) 100%);
+    color:#fff;
+  }
+  .value .eyebrow{color:var(--night-cyan);}
+  .value .sec-title{color:#fff;}
+  .value .lead-text{
+    color:rgba(255,255,255,0.75);
+    max-width:620px;
+    margin-bottom:50px;
+    font-size:.95rem;
+  }
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .vcard{
+    background:rgba(255,255,255,0.045);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;
+    padding:30px 24px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .vcard:hover{transform:translateY(-6px); border-color:rgba(255,255,255,0.3);}
+  .vcard .num{
+    font-family:'Shippori Mincho B1', serif;
+    font-size:2.1rem;
+    font-weight:800;
+    background:linear-gradient(120deg, var(--day-main), var(--night-pink));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:14px;
+    display:block;
+  }
+  .vcard h3{
+    font-size:1.05rem;
+    margin-bottom:12px;
+    font-weight:700;
+  }
+  .vcard p{
+    font-size:.85rem;
+    color:rgba(255,255,255,0.7);
+  }
+  @media (max-width:900px){
+    .card-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .card-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== FLOW ===== */
+  .flow{background:var(--cream);}
+  .timeline{
+    position:relative;
+    margin-top:50px;
+    padding-left:36px;
+    border-left:2px dashed rgba(27,31,59,0.25);
+  }
+  .tl-item{
+    position:relative;
+    margin-bottom:46px;
+  }
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-44px;
+    top:2px;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--day-main), var(--night-pink));
+    box-shadow:0 0 0 6px var(--cream), 0 0 0 7px rgba(27,31,59,0.15);
+  }
+  .tl-item .step-label{
+    font-size:.72rem;
+    letter-spacing:.2em;
+    color:var(--day-sub);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+  .tl-item h3{
+    font-size:1.12rem;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .tl-item p{color:var(--gray); font-size:.9rem; max-width:640px;}
+
+  /* ===== CLOSING ===== */
+  .closing{
+    background:linear-gradient(135deg, var(--day-sub) 0%, var(--night-main) 55%, var(--night-deep) 100%);
+    color:#fff;
+    text-align:center;
+    padding:120px 24px;
+  }
+  .closing .sec-title{color:#fff; margin-bottom:20px;}
+  .closing p.msg{
+    max-width:600px;
+    margin:0 auto 42px;
+    color:rgba(255,255,255,0.88);
+    font-size:.98rem;
+  }
+  .cta-btn{
+    display:inline-block;
+    padding:18px 48px;
+    border-radius:999px;
+    background:#fff;
+    color:var(--night-main);
+    font-weight:700;
+    font-size:1rem;
+    letter-spacing:.05em;
+    box-shadow:0 14px 40px rgba(0,0,0,0.3);
+    transition:transform .25s ease;
+  }
+  .cta-btn:hover{transform:translateY(-3px);}
+  .closing .note{
+    margin-top:26px;
+    font-size:.78rem;
+    color:rgba(255,255,255,0.65);
+    letter-spacing:.08em;
+  }
+
+  footer{
+    background:var(--night-deep);
+    color:rgba(255,255,255,0.5);
+    text-align:center;
+    padding:26px;
+    font-size:.78rem;
+    letter-spacing:.1em;
+  }
+  footer strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-day">
+    <div class="sun"></div>
+    <div class="day-rays"></div>
+  </div>
+  <div class="hero-night">
+    <div class="stars" id="stars"></div>
+    <div class="moon"></div>
+    <div class="neon-sign">宴 ・ 歌 ・ 夜</div>
+  </div>
+
+  <div class="hero-copy">
+    <span class="tag">KAIROS PROPOSAL — 制作提案書</span>
+    <h1>昼はひだまり、夜はきらめき。<br><em>ふたつの時間</em>を、ひとつの扉で伝える。</h1>
+    <p>レストラン×居酒屋。一つのお店が持つ二つの魅力を、矛盾なく一枚のホームページに。</p>
+  </div>
+  <div class="scroll-hint">S C R O L L</div>
+</section>
+
+<section class="understanding">
+  <div class="wrap">
+    <div class="eyebrow">Understanding / 私たちの理解</div>
+    <h2 class="sec-title">「昼も夜も、同じ看板から。」<br>それがこのお店の難しさであり、面白さです。</h2>
+    <p class="lead mincho">
+      昼はお食事を楽しむレストラン、夜はお酒とカラオケで盛り上がる居酒屋。<br>
+      <span>一つのサイトに、相反する二つの気分をどう同居させるか。</span><br>
+      ここが設計できれば、昼の常連も、夜の仲間たちも、どちらも「ここに来たい」と感じるサイトになります。
+    </p>
+    <div class="sub-grid">
+      <div class="sub-card">
+        <div class="mark">☀️ DAYTIME MOOD</div>
+        <p>明るく親しみやすい色使いと、食欲をそそる料理写真の見せ方で、気軽に立ち寄れるランチ需要を取り込みたい。</p>
+      </div>
+      <div class="sub-card">
+        <div class="mark">🌙 NIGHTTIME MOOD</div>
+        <p>お酒とカラオケ、仲間とのひとときを想起させる落ち着きと高揚感。夜の居心地の良さを視覚で伝えたい。</p>
+      </div>
+      <div class="sub-card">
+        <div class="mark">🍽️ CRAFT & CARE</div>
+        <p>食材・調味料へのこだわりや想いを、押しつけがましくなく、自然に伝わる構成にしたい。</p>
+      </div>
+      <div class="sub-card">
+        <div class="mark">🤝 LONG-TERM PARTNER</div>
+        <p>公開して終わりではなく、メニュー更新や改善を重ねながら、長くお付き合いできる相手を探している。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="value">
+  <div class="wrap">
+    <div class="eyebrow">What Kairos Can Do / 提供できる価値</div>
+    <h2 class="sec-title">昼夜ふたつの顔を、<br>一つのブランドとして設計します。</h2>
+    <p class="lead-text">Kairosでは、単なるページ制作ではなく「時間帯ごとの空気感」をデザインに落とし込みます。料理写真を主役にしながら、スマホでも迷わず使える導線まで、一貫して設計します。</p>
+    <div class="card-grid">
+      <div class="vcard">
+        <span class="num">01</span>
+        <h3>昼夜切り替え型デザイン設計</h3>
+        <p>トップページを昼ゾーン・夜ゾーンに分け、配色・フォント・写真トーンを切り替えることで、一目で二つの魅力が伝わる構成にします。</p>
+      </div>
+      <div class="vcard">
+        <span class="num">02</span>
+        <h3>料理が主役のビジュアルギャラリー</h3>
+        <p>ご提供いただく料理・店内写真を最大限活かすレイアウトを設計。盛り付けや質感が伝わる余白と配置にこだわります。</p>
+      </div>
+      <div class="vcard">
+        <span class="num">03</span>
+        <h3>来店につながるスマホ導線</h3>
+        <p>営業時間・アクセス・お問い合わせをスマホでワンアクション確認できるよう設計。初めての方にも迷わせません。</p>
+      </div>
+      <div class="vcard">
+        <span class="num">04</span>
+        <h3>WordPress / STUDIO 柔軟対応</h3>
+        <p>ご希望のツールに合わせて制作。将来的なご自身での更新や、カラオケイベント情報の追加もしやすい構造にします。</p>
+      </div>
+      <div class="vcard">
+        <span class="num">05</span>
+        <h3>公開後も伴走する継続サポート</h3>
+        <p>メニュー改訂、季節イベント、写真の差し替えなど、公開後の運用もご相談いただけます。長期的な関係づくりを前提に進めます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="wrap">
+    <div class="eyebrow">Process / 進め方のイメージ</div>
+    <h2 class="sec-title">ご相談しながら、無理のないペースで。</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="step-label">STEP 01</div>
+        <h3>ヒアリング・素材の確認</h3>
+        <p>お店の魅力、昼と夜それぞれで伝えたい雰囲気、ご用意いただく写真・情報を確認します。</p>
+      </div>
+      <div class="tl-item">
+        <div class="step-label">STEP 02</div>
+        <h3>構成・デザイン方向性の決定</h3>
+        <p>ページ構成（5〜7ページ）と、昼パート／夜パートの配色・レイアウト案をご提案し、すり合わせます。</p>
+      </div>
+      <div class="tl-item">
+        <div class="step-label">STEP 03</div>
+        <h3>制作</h3>
+        <p>店舗紹介、料理メニュー、こだわり、アクセスなど各ページを制作。レスポンシブ対応も並行して進めます。</p>
+      </div>
+      <div class="tl-item">
+        <div class="step-label">STEP 04</div>
+        <h3>確認・調整</h3>
+        <p>実際の見え方をご確認いただきながら、文言や写真の見せ方を細かく調整します。</p>
+      </div>
+      <div class="tl-item">
+        <div class="step-label">STEP 05</div>
+        <h3>公開、そして継続的な運用へ</h3>
+        <p>最終確認の上で公開。その後もページ追加や情報更新など、長くご一緒できればと思います。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#fff;">Next Action</div>
+    <h2 class="sec-title">「一度行ってみたい」を生むサイトを、<br>一緒につくりませんか。</h2>
+    <p class="msg">昼の陽だまりも、夜のきらめきも。どちらも嘘のない形で届けるホームページを、丁寧なコミュニケーションを大切にしながら制作します。まずは一度、お話しさせてください。</p>
+    <a href="#" class="cta-btn">Kairosに相談してみる</a>
+    <p class="note">ご予算・ページ数・ご希望ツール、何でもお気軽にご相談ください。</p>
+  </div>
+</section>
+
+<footer>
+  <strong>Kairos</strong> — Web制作・システム開発チーム ／ ご提案日：ご相談随時受付中
+</footer>
+
+<script>
+  const starField = document.getElementById('stars');
+  const starCount = 60;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('span');
+    s.style.top = Math.random()*100+'%';
+    s.style.left = Math.random()*100+'%';
+    s.style.opacity = (Math.random()*0.6+0.3).toFixed(2);
+    const size = (Math.random()*2+1).toFixed(1);
+    s.style.width = size+'px';
+    s.style.height = size+'px';
+    starField.appendChild(s);
+  }
+</script>
+
+</body>
+</html>
